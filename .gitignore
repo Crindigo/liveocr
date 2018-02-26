@@ -1,0 +1,8 @@
+.idea/
+out/
+build/
+.gradle/
+ss-output/
+.DS_Store
+liveocr.properties
+service_account.json
