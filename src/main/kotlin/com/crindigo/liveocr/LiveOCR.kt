@@ -17,9 +17,12 @@ fun main(args: Array<String>)
 {
     val properties = Properties()
     properties.load(File("./liveocr.properties").reader())
-    
+
+    // directory where screenshot files are saved. on mac, the desktop.
     val inputPath = properties.getProperty("screenshotPath")
+    // directory where files should be moved to.
     val outputPath = properties.getProperty("outputPath")
+    // path to the google service account json file.
     val keyFile = properties.getProperty("keyFile")
 
     val ocr = LiveOCR(inputPath, outputPath, keyFile)
@@ -61,6 +64,8 @@ class LiveOCR(private val screenshotPath: String,
         if ( resp.textAnnotationsCount > 0 ) {
             val text = resp.textAnnotationsList.sortedByDescending { it.description.length }.first().description
             println(text)
+        } else {
+            println("No text found?")
         }
     }
 
